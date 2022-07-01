@@ -24,6 +24,25 @@ if (document.getElementById('changed-icon') == null) {
     icon.href = url;
     icon.id = 'changed-icon';
 
-    // 完了アラート
-    alert('Changed!');
+    /** ここから下は，Slack が通知を受け取りファビコンが書き換えられることを監視してさらに上書きする */
+    const head = document.head
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (document.getElementById('changed-icon') == null) {
+                 //ファビコンを上書きする
+                const icon = document.querySelector('link[rel*="shortcut icon"]');
+                icon.href = url;
+                icon.id = 'changed-icon';
+            }
+        });
+    });
+
+    const config = {
+        characterData: true,
+        subtree: true,
+        childList: true, // 子ノードの変化を監視
+        subtree: true // 子孫ノードも監視対象に含める
+    };
+
+    observer.observe(head, config);
 }
