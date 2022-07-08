@@ -2,13 +2,7 @@
     "name": "SlackWorkspaceFavicon",
     "version": "1.1",
     "manifest_version": 3,
-    "action": {
-        "default_title": "Click to change the slack favicon to your workspace logo!"
-    },
-    "permissions": ["activeTab", "scripting"],
-    "background": {
-        "service_worker": "background.js"
-    },
+    "permissions": ["activeTab"],
     "icons": {
         "16": "imgs/icon16.png",
         "48": "imgs/icon48.png",
@@ -17,7 +11,7 @@
     "content_scripts": [
         {
             "matches": ["https://app.slack.com/client/*"],
-            "js": ["script.js", "background.js"]
+            "js": ["script.js"]
         }
     ]
 }
