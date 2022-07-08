@@ -39,7 +39,6 @@ if (document.getElementById('changed-icon') == null) {
 
     const config = {
         characterData: true,
-        subtree: true,
         childList: true, // 子ノードの変化を監視
         subtree: true // 子孫ノードも監視対象に含める
     };
