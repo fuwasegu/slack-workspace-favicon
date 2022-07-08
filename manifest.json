@@ -16,7 +16,7 @@
     },
     "content_scripts": [
         {
-            "matches": ["https://app.slack.com/*"],
+            "matches": ["https://app.slack.com/client/*"],
             "js": ["script.js", "background.js"]
         }
     ]
