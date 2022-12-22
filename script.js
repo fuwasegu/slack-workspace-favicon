@@ -34,7 +34,7 @@ const favicon = {
 
 
 /** Slack が通知を受け取りファビコンが書き換えられることを監視してさらに上書きする */
-const icon_observer = new MutationObserver((mutations) => {
+const iconObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
         if (document.getElementById('changed-icon') == null) {
              // ファビコンを上書きする
@@ -44,31 +44,31 @@ const icon_observer = new MutationObserver((mutations) => {
 });
 
 const head = document.head
-const icon_observer_config = {
+const iconObserverConfig = {
     characterData: true,
     subtree: true,
     childList: true, // 子ノードの変化を監視
     subtree: true // 子孫ノードも監視対象に含める
 };
 
-// icon_observer の有効化は、読み込み完了後に実行
+// iconObserver の有効化は、読み込み完了後に実行
 
 
 /** タイトルの変更（読み込みの完了）を監視する */
-const title_observer = new MutationObserver(() => {
+const titleObserver = new MutationObserver(() => {
     // ファビコンを上書きする
     favicon.init();
     favicon.update();
 
     // 通知時の監視を有効化
-    icon_observer.observe(head, icon_observer_config);
+    iconObserver.observe(head, iconObserverConfig);
 
-    title_observer.disconnect(); // 1度だけ実行
+    titleObserver.disconnect(); // 1度だけ実行
 });
 
 const title = document.querySelector('title');
-const title_observer_config = {
+const titleObserverConfig = {
     childList: true
 };
 
-title_observer.observe(title, title_observer_config);
+titleObserver.observe(title, titleObserverConfig);
